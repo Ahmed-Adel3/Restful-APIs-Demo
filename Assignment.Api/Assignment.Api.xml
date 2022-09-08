@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Assignment.Api</name>
+    </assembly>
+    <members>
+        <member name="T:Assignment.Api.Controllers.AccountApiController">
+            <summary> Account Categories Controller</summary>
+        </member>
+        <member name="M:Assignment.Api.Controllers.AccountApiController.#ctor(Microsoft.AspNetCore.Identity.UserManager{Assignment.Data.Entities.ApplicationUser},Microsoft.Extensions.Configuration.IConfiguration,Assignment.Repositories.IUnitOfWork)">
+            <summary> Controller CTOR </summary>
+        </member>
+        <member name="M:Assignment.Api.Controllers.AccountApiController.Login(Models.WebApiViewModels.LoginDto)">
+            <summary> Normal Login - Anonymous API </summary>
+            <remarks>Login with credentials </remarks>
+            <param name="model"></param>  
+            <response code="200">Returns User data and access token</response>
+            <response code="400">If login failed</response> 
+            <response code="500">Server Error</response> 
+        </member>
+        <member name="M:Assignment.Api.Controllers.AccountApiController.Register(Models.WebApiViewModels.RegisterDto)">
+            <summary> Normal Register - Anonymous API </summary>
+            <remarks> New user to be added </remarks>
+            <param name="model"></param>  
+            <response code="201">Returns Message to check email </response>
+            <response code="400">If register failed</response> 
+            <response code="500">Server Error</response> 
+        </member>
+        <member name="T:Assignment.Api.Controllers.CategoriesController">
+            <summary> Product Categories Controller</summary>
+        </member>
+        <member name="M:Assignment.Api.Controllers.CategoriesController.#ctor(Assignment.Repositories.IUnitOfWork,AutoMapper.IMapper)">
+            <summary> Controller CTOR </summary>
+        </member>
+        <member name="M:Assignment.Api.Controllers.CategoriesController.GetAllCategories">
+            <summary>Get All Categories</summary>
+            <remarks>To fill dropdown list of categories when entering a new product</remarks>
+            <response code="200">Returns Categories according to filters entered </response>
+            <response code="500">Server Error occured while fetching data</response> 
+        </member>
+        <member name="T:Assignment.Api.Controllers.ProductsController">
+            <summary> Product Categories Controller</summary>
+        </member>
+        <member name="M:Assignment.Api.Controllers.ProductsController.#ctor(Assignment.Repositories.IUnitOfWork)">
+            <summary> Controller CTOR </summary>
+        </member>
+        <member name="M:Assignment.Api.Controllers.ProductsController.GetAllProductsV1(System.Int64)">
+            <summary> Get All Products [ First version ] </summary>
+            <remarks> Let's assume first version only supporting filtering with product category </remarks>
+            <param name="categoryId"> ID of the Category for filtering  </param>
+            <response code="200">Returns Products according to filters entered </response>
+            <response code="400">Client Side data error</response>
+            <response code="404">If category is not found</response>
+            <response code="500">ServerError occured while fetching data </response> 
+        </member>
+        <member name="M:Assignment.Api.Controllers.ProductsController.GetAllProductsV2(System.Int32,System.Int32,System.Int64)">
+            <summary> Get All Products [ Version 2 of the API ] </summary>
+            <remarks> Get all products in system with paging </remarks>
+            <param name="pageNumber"> Page Number for Paging </param>
+            <param name="pageSize"> Number of records needed </param>
+            <param name="categoryId"> ID of the Category for filtering  </param>
+            <response code="200">Returns Products according to filters entered </response>
+            <response code="400">Client Side data error</response>
+            <response code="404">If category is not found</response>
+            <response code="500">ServerError occured while fetching data </response> 
+        </member>
+        <member name="M:Assignment.Api.Controllers.ProductsController.GetProductById(System.Int64)">
+            <summary> Get Product By ID </summary>
+            <remarks> Get the product matching a specific ID </remarks>
+            <param name="id">Id of the product needed </param>
+            <response code="200">Returns Products according to filters entered </response>
+            <response code="400">Client Side data error</response>
+            <response code="404">Product is not found</response>
+            <response code="500">ServerError occured while fetching data </response> 
+        </member>
+        <member name="M:Assignment.Api.Controllers.ProductsController.AddProduct(Assignment.Infrastructure.DTOs.CreateProductDto)">
+            <summary>Add a new product [ Requires Authorization ]</summary>
+            <remarks>Add new product to the system</remarks>
+            <param name="model"></param>  
+            <response code="200">Returns product added successfully message</response>
+            <response code="400">Client Side data error</response>
+            <response code="401">Authentication Error</response>
+            <response code="500">ServerError occured while fetching data </response> 
+        </member>
+        <member name="M:Assignment.Api.Controllers.ProductsController.EditProduct(System.Int64,Assignment.Infrastructure.DTOs.CreateProductDto)">
+            <summary>Update product [ Requires Authorization ]</summary>
+            <remarks>Update product to the system</remarks>
+            <param name="id">Product ID to be edited</param>
+            <param name="model"> CreateProductDto Object Model </param>  
+            <response code="204">Returns product updated successfully message</response>
+            <response code="400">Client Side data error</response>
+            <response code="401">Authentication Error</response>
+            <response code="500">ServerError occured while fetching data </response> 
+        </member>
+        <member name="M:Assignment.Api.Controllers.ProductsController.EditProduct(System.Int64,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{Assignment.Infrastructure.DTOs.PatchProductDto})">
+            <summary>Update product [ Requires Authorization ]</summary>
+            <remarks>Update product to the system</remarks>
+            <param name="id">Product ID to be edited</param>
+            <param name="model">JSON Patch Document</param>  
+            <response code="204">Returns product updated successfully message</response>
+            <response code="400">Client Side data error</response>
+            <response code="401">Authentication Error</response>
+            <response code="500">ServerError occured while editing item </response> 
+        </member>
+        <member name="M:Assignment.Api.Controllers.ProductsController.DeleteProduct(System.Int64)">
+            <summary>Delete product [ Requires Authorization ]</summary>
+            <remarks>Delete product from the system</remarks>
+            <param name="id">Product Id to be deleted</param>
+            <response code="204">Returns product deleted successfully message</response>
+            <response code="400">Client Side data error</response>
+            <response code="401">Authentication Error</response>
+            <response code="500">ServerError occured while deleting data </response> 
+        </member>
+    </members>
+</doc>
